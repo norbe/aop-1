@@ -34,6 +34,15 @@ class AdvisedClassType
 		$argumentsPass = [];
 		$args = [];
 		foreach ($originalMethod->getParameters() as $parameter) {
+			if($parameter instanceof Code\PromotedParameter) {
+				$notPromotedParameter = new Parameter($parameter->getName());
+				$notPromotedParameter->setType($parameter->getType());
+				$notPromotedParameter->setDefaultValue($parameter->getDefaultValue());
+				$notPromotedParameter->setNullable($parameter->isNullable());
+				$notPromotedParameter->setReference($parameter->isReference());
+				$notPromotedParameter->setAttributes($parameter->getAttributes());
+				$parameter = $notPromotedParameter;
+			}
 			/** @var Code\Parameter $parameter */
 			$argumentsPass[] = '$' . $parameter->getName();
 			$args[$parameter->getName()] = $parameter;
