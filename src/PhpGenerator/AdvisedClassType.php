@@ -35,7 +35,7 @@ class AdvisedClassType
 		$args = [];
 		foreach ($originalMethod->getParameters() as $parameter) {
 			if($parameter instanceof Code\PromotedParameter) {
-				$notPromotedParameter = new Parameter($parameter->getName());
+				$notPromotedParameter = new Code\Parameter($parameter->getName());
 				$notPromotedParameter->setType($parameter->getType());
 				$notPromotedParameter->setDefaultValue($parameter->getDefaultValue());
 				$notPromotedParameter->setNullable($parameter->isNullable());
